@@ -1,0 +1,53 @@
+<core:FragmentDefinition
+    xmlns:core="sap.ui.core"
+    xmlns:u="sap.ui.unified"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+>
+    <Dialog
+        id="_IDDialogH"
+        title="title"
+        class="sapUiResponsiveContentPadding"
+        beforeOpen=".onBeforeOpen"
+        afterClose=".onAfterClose"
+    >
+        <content>
+            <Label
+                id="_IDLabel"
+                text="Enter Student Id : "
+            />
+            <Input id="idInput1" />
+            <Label
+                id="_nameLabel"
+                text="Enter Student Name : "
+            />
+            <Input id="nameInput1" />
+            <Label
+                id="_ageLabel"
+                text="Enter Student Age : "
+            />
+            <Input id="ageInput" />
+            <Label
+                id="_addressLabel"
+                text="Enter Student Address : "
+            />
+            <Input id="addressInput" />
+        </content>
+        <Button
+            id="cancel"
+            core:require="{ handler: 'dialog/ext/controller/HandelAction'}"
+            text="Cancel"
+            enabled="true"
+            press="handler.onCancel"
+            width="150px"
+        />
+        <Button
+            id="save"
+            core:require="{ handler: 'dialog/ext/controller/HandelAction'}"
+            text="Save"
+            enabled="true"
+            press="handler.onSave"
+            width="150px"
+        />
+    </Dialog>
+</core:FragmentDefinition>

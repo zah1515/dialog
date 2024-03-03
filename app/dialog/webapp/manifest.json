@@ -1,0 +1,163 @@
+{
+  "_version": "1.59.0",
+  "sap.app": {
+    "id": "dialog",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:lrop",
+      "version": "1.12.4",
+      "toolsId": "43fc28ed-2c20-42c4-b379-88eae97de593"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/odata/v4/student-dervice/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "odataVersion": "4.0"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.120.8",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.ushell": {},
+        "sap.fe.templates": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "dialog.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "synchronizationMode": "None",
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "@i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "uri": "i18n/i18n.properties"
+      }
+    },
+    "resources": {
+      "css": []
+    },
+    "routing": {
+      "routes": [
+        {
+          "pattern": ":?query:",
+          "name": "studentList",
+          "target": "studentList"
+        },
+        {
+          "pattern": "student({key}):?query:",
+          "name": "studentObjectPage",
+          "target": "studentObjectPage"
+        }
+      ],
+      "targets": {
+        "studentList": {
+          "type": "Component",
+          "id": "studentList",
+          "name": "sap.fe.templates.ListReport",
+          "options": {
+            "settings": {
+              "contextPath": "/student",
+              "variantManagement": "Page",
+              "navigation": {
+                "student": {
+                  "detail": {
+                    "route": "studentObjectPage"
+                  }
+                }
+              },
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.LineItem": {
+                  "actions": {
+                    "openpopup": {
+                      "press": "dialog.ext.controller.HandelAction.handelpopup",
+                      "visible": true,
+                      "enabled": true,
+                      "requiresSelection": false,
+                      "text": "PopUp"
+                    }
+                  },
+                  "columns": {
+                    "Edit": {
+                      "header": "Take Action",
+                      "width": "150px",
+                      "position": {
+                        "anchor": "DataField::joiningDate",
+                        "placement": "After"
+                      },
+                      "template": "dialog.ext.fragment.Edit",
+                      "horizontalAlign": "Center",
+                      "availability": "Default",
+                      "text": "Edit"
+                    }
+                  }
+                }
+              },
+              "initialLoad": "Enabled"
+            }
+          }
+        },
+        "studentObjectPage": {
+          "type": "Component",
+          "id": "studentObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "editableHeaderContent": false,
+              "contextPath": "/student"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sap.fiori": {
+    "registrationIds": [],
+    "archeType": "transactional"
+  }
+}
